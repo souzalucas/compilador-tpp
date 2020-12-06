@@ -1,44 +1,33 @@
-inteiro: vet[10]
-inteiro: tam
+inteiro: x
+inteiro: vetor[10]
+x := 50
 
-tam := 10
+inteiro principal(inteiro: a)
+	inteiro: digitado
+	inteiro: i
 
-{ preenche o vetor no pior caso }
-preencheVetor()
-  inteiro: i
-  inteiro: j
-  i := 0
-  j := tam
+	func_a(tururu, i, x )
+
+  i := 1
+	leia(digitado)
+	inteiro: xis
   repita
-    vet[i] = j
-    i := i + 1
-    j := j - 1
-  até i < tam
+		escreva(xis)
+		i := i+1
+	até i <= digitado
+
+	retorna(0)
 fim
 
-{ implementação do bubble sort }
-bubble_sort()
-  inteiro: i
-  i := 0
-  repita
-    inteiro: j
-    j := 0
-    repita
-      se vet[i] > v[j] então
-        inteiro: temp
-        temp := vet[i]
-        vet[i] := vet[j]
-        vet[j] := temp
-      fim
-      j := j + 1
-    até j < i
-    i := i + 1
-  até i < tam
+inteiro func_a(inteiro: a, inteiro: b)
+	digitado := 10
+	teste := 5
+	inteiro: bla
+	flutuante: bleh
 fim
 
-{ programa principal }
-inteiro principal()
-  preencheVetor()
-  bubble_sort()
-  retorna(0)
+inteiro chama_bb()
+	
+	principal(10)
+	retorna(0)
 fim
