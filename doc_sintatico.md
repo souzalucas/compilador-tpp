@@ -14,7 +14,7 @@ O método LALR funciona da seguinte forma: uma tabela de regras é gerada a part
 
 ## Implementação
 
-Para a implementação, foi criada uma função para cada regra. Cada função contém um cabeçalho com a própria regra em si, que será usada para a execução do parser pelo yacc. Nas próprias funções já temos o código necessário para a geração da árvore sintática, gerada pela biblioteca anytree.
+Para a implementação, foi criada uma função para cada regra. Cada função contém um cabeçalho com a própria regra em si, que será usada para a execução do parser pelo yacc. Nas próprias funções já temos o código necessário para a geração da árvore sintática.
 
 O yacc, como mencionado é a ferramenta do python responsável por realizar o parser do analisador sintático. O yacc é uma ferramenta que se encontra dentro do PLY, biblioteca do python responsável por conter ferramentas léxicas e sintáticas para desenvolvimento de compiladores. O yacc, por sua vez, provê suporte eficiente e adequado para criação de gramáticas e também dá suporte para tratamento de problemas com regras vazias e gramáticas ambíguas. O analisador sintático acusa erros sintáticos da linguagem. A árvore sintática gerada será utilizada posteriormente para a análise semântica do programa de entrada. Ela contém todas as ramificações de tudo o que contém no programa de entrada. A árvore gerada será podada na análise semântica e será utilizada para criacão das regras semânticas.
 
