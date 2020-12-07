@@ -1,50 +1,131 @@
 import sys
 import ply.lex as lex
 
-sucesso = True
-
-# Lista de palavras reservadas
 reservadas = {
-  'se'        : 'SE',
-  'repita'    : 'REPITA',
-  'fim'       : 'FIM',
-  'leia'      : 'LEIA',
-  'retorna'   : 'RETORNA',
-  'escreva'   : 'ESCREVA',
-  'inteiro'   : 'INTEIRO',
-  'flutuante' : 'FLUTUANTE',
-  'até'       : 'ATE',
-  'senão'     : 'SENAO',
-  'então'     : 'ENTAO'
+  'retorna': 'RETORNA',
+  'leia': 'LEIA',
+  'escreva': 'ESCREVA',
+  'se': 'SE',
+  'então': 'ENTAO',
+  'senão': 'SENAO',
+  'repita': 'REPITA',
+  'até': 'ATE',
+  'fim': 'FIM',
+  'inteiro': 'INTEIRO',
+  'flutuante': 'FLUTUANTE'
 }
 
-# Lista de nomes de tokens com as palavras reservadas
-tokens = ['MAIS', 'MENOS', 'MULTIPLICACAO', 'DIVISAO', 'DOIS_PONTOS', 'VIRGULA', 'MENOR', 'MAIOR', 'IGUAL', 'DIFERENTE', 'MENOR_IGUAL', 'MAIOR_IGUAL', 'E_LOGICO', 'OU_LOGICO', 'NEGACAO', 'ABRE_PARENTESE', 'FECHA_PARENTESE', 'ABRE_COLCHETE', 'FECHA_COLCHETE', 'ATRIBUICAO', 'NUM_INTEIRO', 'NUM_PONTO_FLUTUANTE', 'NUM_NOTACAO_CIENTIFICA', 'ID', 'COMENTARIO'] + list(reservadas.values())
+tokens = [
+  'NUM_NOTACAO_CIENTIFICA',
+  'NUM_PONTO_FLUTUANTE',
+  'NUM_INTEIRO',
+  'ID',
+  'ATRIBUICAO',
+  'DOIS_PONTOS',
+  'VIRGULA',
+  'ABRE_PARENTESE',
+  'FECHA_PARENTESE',
+  'ABRE_COLCHETE',
+  'FECHA_COLCHETE',
+  'MAIS',
+  'MENOS',
+  'MULTIPLICACAO',
+  'DIVISAO',
+  'IGUAL',
+  'DIFERENTE',
+  'MENOR_IGUAL',
+  'MAIOR_IGUAL',
+  'MENOR',
+  'MAIOR',
+  'E_LOGICO',
+  'OU_LOGICO',
+  'NEGACAO'
+] + list(reservadas.values())
 
 t_ANY_ignore = ' \t\r\f\v'
 
-# Expressões regulares para tokens simples
-t_MAIS              = r'\+'
-t_MENOS             = r'-'
-t_MULTIPLICACAO     = r'\*'
-t_DIVISAO           = r'/'
-t_DOIS_PONTOS       = r':'
-t_VIRGULA           = r','
-t_MENOR             = r'<'
-t_MAIOR             = r'>'
-t_IGUAL             = r'='
-t_DIFERENTE         = r'<>'
-t_MENOR_IGUAL       = r'<='
-t_MAIOR_IGUAL       = r'>='
-t_E_LOGICO          = r'\&\&'
-t_OU_LOGICO         = r'\|\|'
-t_NEGACAO           = r'!'
-t_ABRE_PARENTESE    = r'\('
-t_FECHA_PARENTESE   = r'\)'
-t_ABRE_COLCHETE     = r'\['
-t_FECHA_COLCHETE    = r'\]'
-t_ATRIBUICAO        = r':='
+# Expressoes Regulares
+def t_ATRIBUICAO(t):
+  r':='
+  return t
 
+def t_DOIS_PONTOS(t):
+  r':'
+  return t
+
+def t_VIRGULA(t):
+  r','
+  return t
+
+def t_ABRE_PARENTESE(t):
+  r'\('
+  return t
+  
+def t_FECHA_PARENTESE(t):
+  r'\)'
+  return t
+
+def t_ABRE_COLCHETE(t):
+  r'\['
+  return t
+
+def t_FECHA_COLCHETE(t):
+  r'\]'
+  return t
+
+def t_MAIS(t):
+  r'\+'
+  return t
+
+def t_MENOS(t):
+  r'\-'
+  return t
+
+def t_MULTIPLICACAO(t):
+  r'\*'
+  return t
+
+def t_DIVISAO(t):
+  r'\/'
+  return t
+
+def t_IGUAL(t):
+  r'\='
+  return t
+
+def t_DIFERENTE(t):
+  r'\!'
+  return t
+
+def t_MENOR_IGUAL(t):
+  r'<='
+  return t
+
+def t_MAIOR_IGUAL(t):
+  r'>='
+  return t
+
+def t_MENOR(t):
+  r'<'
+  return t
+
+def t_MAIOR(t):
+  r'>'
+  return t
+
+def t_E_LOGICO(t):
+  r'\&\&'
+  return t
+
+def t_OU_LOGICO(t):
+  r'\|\|'
+  return t
+
+def t_NEGACAO(t):
+  r'\<\>'
+  return t
+
+# Expressoes regulares mais especificas
 def t_NUM_NOTACAO_CIENTIFICA(t):
   r'(-|\+)?[\d+]+\.?[\d+]*(e|E)(-|\+)?[\d+]+'
   t.value = float(t.value)
@@ -65,41 +146,14 @@ def t_ID(t):
   t.type = reservadas.get(t.value, 'ID')
   return t
 
-def t_COMENTARIO(t):
+def t_comment(t):
   r'(\{(.|\n)*?\})|(\{(.|\n)*?)$'
   t.lexer.lineno += len(t.value.split('\n')) - 1
   pass
 
-# Expressão Regular para a palavra reservada 'senão'
-def t_SENAO(t):
-  r'senão'
-  t.type = reservadas.get(t.value,'SENAO')
-  return t
-
-# Expressão Regular para a palavra reservada 'então'
-def t_ENTAO(t):
-  r'então'
-  t.type = reservadas.get(t.value,'ENTAO')
-  return t
-
-# Expressão Regular para a palavra reservada 'até'
-def t_ATE(t):
-  r'até'
-  t.type = reservadas.get(t.value,'ATE')
-  return t
-    
-# Expressão regular para quebra de linha
-def t_NOVA_LINHA(t):
-  r'\n+'
-  t.lexer.lineno += len(t.value)
- 
-# Erro
-def t_error(t):
-  global sucesso
-  sucesso = False
-
-  print("Caractere Ilegal '%s'" % t.value[0])
-  t.lexer.skip(1)
+def t_ANY_error(t):
+	print('Caracter Inválido \'' + t.value[0] + '\' em ' + str(t.lineno) + ':' + str(f_column(t)))
+	t.lexer.skip(1)
 
 def f_column(token):
   input = token.lexer.lexdata
@@ -110,45 +164,38 @@ def t_ANY_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
+lexer = lex.lex()
+
 # Função para imprimir os tokens
 def imprimeToken(valor, tipo):
   print(valor, ":", tipo)
 
-# Construindo o lexer
-lexer = lex.lex()
+def geraTokens(data):
+  lexer.input(data)
 
-# Função para gerar tokens
-def geraTokens(dados):
+  tokens = []
 
-  # Atribuindo os dados ao lexer
-  lexer.input(dados)
-  
-  tokens =  []
-
-  # Imprimindo tokens
   while True:
-    tok = lexer.token()
-    if not tok: break
-  
+    tokens_gerados = lexer.token()
+    if not tokens_gerados: break
+
     tokens.append({
-      'token_itself': tok,
-      'token': tok.type,
-      'value': tok.value,
-      'line': tok.lineno,
-      'column': f_column(tok)
+      'token_itself': tokens_gerados,
+      'token': tokens_gerados.type,
+      'value': tokens_gerados.value,
+      'line': tokens_gerados.lineno,
+      'column': f_column(tokens_gerados)
     })
-  
-  return tokens, sucesso
 
-# def main():
-#   # Arquivo do codigo a ser analisado
-#   nome_arquivo = sys.argv[1]
+    imprimeToken(tokens_gerados.value, tokens_gerados.type)
 
-#   # Abrindo e lendo arquivo
-#   arquivo = open(nome_arquivo, "r")
-#   string_arquivo = arquivo.read()
+  return tokens
 
-#   # Gerando tokens
-#   geraTokens(string_arquivo)
+nome_arquivo = sys.argv[1]
 
-# main()
+# Abrindo e lendo arquivo
+arquivo = open(nome_arquivo, "r")
+string_arquivo = arquivo.read()
+
+# Gerando tokens
+geraTokens(string_arquivo)

@@ -7,7 +7,7 @@ from anytree import Node
 tokens = lex.tokens
 
 sucesso = True
-total_lines = 0
+total_linhas = 0
 
 def f_column(token, pos):
   input = token.lexer.lexdata
@@ -48,7 +48,7 @@ def p_declaracao_variaveis(p):
 
   p[0] = Node('declaracao_variaveis', value = 'declaracao_variaveis', children = [
     p[1],
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3]
   ])
 
@@ -68,7 +68,7 @@ def p_lista_variaveis(p):
   if(len(p) == 4):
     p[0] = Node('lista_variaveis', value = 'lista_variaveis', children = [
       p[1],
-      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
       p[3]
     ])
   else:
@@ -82,12 +82,12 @@ def p_var(p):
 
   if(len(p) == 3):
     p[0] = Node('var', value = 'var', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
       p[2]
     ])
   else:
     p[0] = Node('var', value = 'var', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
     ])
 
 def p_indice(p):
@@ -99,15 +99,15 @@ def p_indice(p):
   if(len(p) == 5):
     p[0] = Node('indice', value = 'indice', children = [
       p[1],
-      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
       p[3],
-      Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4))
+      Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
     ])
   else:
     p[0] = Node('indice', value = 'indice', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
       p[2],
-      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3))
+      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3))
     ])
 
 def p_tipo(p):
@@ -117,7 +117,7 @@ def p_tipo(p):
   '''
 
   p[0] = Node('tipo', value = 'tipo', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_declaracao_funcao(p):
@@ -137,10 +137,10 @@ def p_cabecalho(p):
   '''
 
   p[0] = Node('cabecalho', value = 'cabecalho', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3],
-    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4)),
+    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4)),
     p[5]
   ])
 
@@ -154,7 +154,7 @@ def p_lista_parametros(p):
   if(len(p) == 4):
     p[0] = Node('lista_parametros', value = 'lista_parametros', children = [
       p[1],
-      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
       p[3]
     ])
   else:
@@ -171,8 +171,8 @@ def p_parametro(p):
 
   p[0] = Node('parametro', value = 'parametro', children = [
     p[1],
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
-    Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3))
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
+    Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3))
   ])
 
 def p_corpo(p):
@@ -207,21 +207,21 @@ def p_se(p):
 
   if(len(p) == 6):
     p[0] = Node('condicional', value = 'condicional', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
       p[2],
-      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3)),
+      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3)),
       p[4],
-      Node(str(p[5]), value = str(p[5]), line = (p.lineno(5) - (total_lines - 1)), column = f_column(p, 5))
+      Node(str(p[5]), value = str(p[5]), line = (p.lineno(5) - (total_linhas - 1)), column = f_column(p, 5))
     ])
   else:
     p[0] = Node('condicional', value = 'condicional', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
       p[2],
-      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3)),
+      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3)),
       p[4],
-      Node(str(p[5]), value = str(p[5]), line = (p.lineno(5) - (total_lines - 1)), column = f_column(p, 5)),
+      Node(str(p[5]), value = str(p[5]), line = (p.lineno(5) - (total_linhas - 1)), column = f_column(p, 5)),
       p[6],
-      Node(str(p[7]), value = str(p[7]), line = (p.lineno(7) - (total_lines - 1)), column = f_column(p, 7))
+      Node(str(p[7]), value = str(p[7]), line = (p.lineno(7) - (total_linhas - 1)), column = f_column(p, 7))
     ])
 
 def p_repita(p):
@@ -230,9 +230,9 @@ def p_repita(p):
   '''
 
   p[0] = Node('repita', value = 'repita', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
     p[2],
-    Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3)),
+    Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3)),
     p[4]
   ])
 
@@ -243,7 +243,7 @@ def p_atribuicao(p):
 
   p[0] = Node('atribuicao', value = 'atribuicao', children = [
     p[1],
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3]
   ])
 
@@ -253,10 +253,10 @@ def p_leia(p):
   '''
 
   p[0] = Node('leia', value = 'leia', children = [
-    Node(str(p[1]), value = str(p[2]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[1]), value = str(p[2]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3],
-    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4))
+    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
   ])
 
 def p_escreva(p):
@@ -265,10 +265,10 @@ def p_escreva(p):
   '''
 
   p[0] = Node('escreva', value = 'escreva', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3],
-    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4))
+    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
   ])
 
 def p_retorna(p):
@@ -277,10 +277,10 @@ def p_retorna(p):
   '''
 
   p[0] = Node('retorna', value = 'retorna', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3],
-    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4))
+    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
   ])
 
 def p_expressao(p):
@@ -358,7 +358,7 @@ def p_operador_relacional(p):
   '''
 
   p[0] = Node('operador_relacional', value = 'operador_relacional', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_operador_soma(p):
@@ -368,7 +368,7 @@ def p_operador_soma(p):
   '''
 
   p[0] = Node('operador_soma', value = 'operador_soma', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_operador_logico(p):
@@ -378,7 +378,7 @@ def p_operador_logico(p):
   '''
 
   p[0] = Node('operador_logico', value = 'operador_logico', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_operador_negacao(p):
@@ -387,7 +387,7 @@ def p_operador_negacao(p):
   '''
 
   p[0] = Node('operador_negacao', value = 'operador_negacao', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_operador_multiplicacao(p):
@@ -397,7 +397,7 @@ def p_operador_multiplicacao(p):
   '''
 
   p[0] = Node('operador_multiplicacao', value = 'operador_multiplicacao', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_fator(p):
@@ -410,9 +410,9 @@ def p_fator(p):
 
   if(len(p) == 4):
     p[0] = Node('fator', value = 'fator', children = [
-      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
+      Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
       p[2],
-      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_lines - 1)), column = f_column(p, 3))
+      Node(str(p[3]), value = str(p[3]), line = (p.lineno(3) - (total_linhas - 1)), column = f_column(p, 3))
     ])
   else:
     p[0] = Node('fator', value = 'fator', children = [p[1]])
@@ -425,7 +425,7 @@ def p_numero(p):
   '''
 
   p[0] = Node('numero', value = 'numero', children = [
-    Node(str(p[1]), value = p[1], line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1))
+    Node(str(p[1]), value = p[1], line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1))
   ])
 
 def p_chamada_funcao(p):
@@ -434,10 +434,10 @@ def p_chamada_funcao(p):
   '''
 
   p[0] = Node('chamada_funcao', value = 'chamada_funcao', children = [
-    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_lines - 1)), column = f_column(p, 1)),
-    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+    Node(str(p[1]), value = str(p[1]), line = (p.lineno(1) - (total_linhas - 1)), column = f_column(p, 1)),
+    Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
     p[3],
-    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_lines - 1)), column = f_column(p, 4))
+    Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
   ])
 
 
@@ -451,7 +451,7 @@ def p_lista_argumentos(p):
   if(len(p) == 4):
     p[0] = Node('lista_argumentos', value = 'lista_argumentos', children = [
       p[1],
-      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_lines - 1)), column = f_column(p, 2)),
+      Node(str(p[2]), value = str(p[2]), line = (p.lineno(2) - (total_linhas - 1)), column = f_column(p, 2)),
       p[3]
     ])
   else:
@@ -466,19 +466,6 @@ def p_vazio(p):
   '''
   pass
 
-
-#### Errors Section ####
-
-# def p_chamada_funcao_error(p):
-#   global sucesso
-#   sucesso = False
-#   '''
-#     chamada_funcao : ID ABRE_PARENTESE error FECHA_PARENTESE
-#   '''
-#   print("Erro lista de argumentos da chamada de funcao")
-#   exit(1)
-
-
 def p_error(p):
   global sucesso
   sucesso = False
@@ -491,9 +478,9 @@ def p_error(p):
 
 yacc.yacc()
 
-def parser(data, file_num_lines):
-  global total_lines
-  total_lines = file_num_lines
+def analisador(data, file_num_lines):
+  global total_linhas
+  total_linhas = file_num_lines
   tree = yacc.parse(data, tracking = True)
 
   return tree, sucesso
