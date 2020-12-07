@@ -1,5 +1,9 @@
 # Compilador TPP
 
+[Analise Sintática] (doc_lexico.md)
+
+[Analise Léxica] (doc_lexico.md)
+
 # Análise Léxica (Trabalho - 1ª parte)
 
 O analisador léxico realiza uma varredura em todo o código-fonte em T++ e gera uma lista de tokens. Um token é uma marca que representa uma unidade. A lista de tokens será fundamental para as próximas etapas do compilador. Para desenvolvimento do analisador léxico foi utilizado a biblioteca PLY.
