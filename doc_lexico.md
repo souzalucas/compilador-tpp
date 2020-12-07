@@ -7,7 +7,7 @@ O analisador léxico realiza uma varredura em todo o código-fonte em T++ e gera
 O T++ utilizado neste trabalho é uma linguagem de programação simples, desenvolvida para fins didáticos a ser utilizada para a fixação dos conteúdos da disciplina de compiladores.
 
 Esta linguagem possui suas palavras-chave em português. Os tipos de variáveis suportados são inteiro, flutuante e notação científica. Há suporte para estrutura condicional "se-entao-senão", bem como a estrutura de repetição "repita-até". Além disso, a linguagem suporta operadores lógicos e aritméticos. Também é possível ler e escrever
-dados no terminal, criar vetores e funcões.
+dados no terminal, criar vetores e funções.
 
 Mais detalhes do analisador léxico serão apresentados a seguir.
 
