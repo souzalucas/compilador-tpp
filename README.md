@@ -170,7 +170,7 @@ fim
 Para executar o programa, é necessário passar como parâmetro o arquivo `.tpp` a ser feito a varredura.
 
 ```shell
-python3 lexer.py lexica-testes/fat.tpp
+python3 lexico.py lexica-testes/fat.tpp
 ```
 
 O resultado sairá como:
