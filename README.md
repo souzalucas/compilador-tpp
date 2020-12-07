@@ -111,8 +111,8 @@ tokens = ['MAIS', 'MENOS', 'MULTIPLICACAO', 'DIVISAO',
 A partir daí, é necessário definirmos as expressões regulares de cada token, por exemplo:
 ```python
 #Expressão regular para o operador '+'
-def t_MAIOR(t):
-  r'>'
+def t_MAIS(t):
+  r'\+'
   return t
 
 # Expressão Regular para a palavra reservada 'senão'
