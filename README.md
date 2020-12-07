@@ -54,7 +54,6 @@ Abaixo temos as expressões regulares de cada token da linguagem.
 |r'\\)'|FECHA_PARENTESE|
 |r'\\['|ABRE_COLCHETE|
 |r'\\]'|FECHA_COLCHETE| 
-|r'\\{[^\\}]+?\\}'|COMENTARIO|
 |r'[a-zA-Z_áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-zA-Z_0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]*'|ID|
 |r'(-\|\\+)?\d+'|NUM_INTEIRO|
 |r'(-\|\\+)?[\d+]+\\.[\d+]*'|NUM_PONTO_FLUTUANTE|
