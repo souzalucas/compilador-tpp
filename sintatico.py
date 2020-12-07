@@ -1,9 +1,12 @@
 import ply.yacc as yacc
 
+# Analisador léxico
 import lexico as lex
 
+# Biblioteca para a geração da árvore
 from anytree import Node
 
+# Lista de tokens
 tokens = lex.tokens
 
 sucesso = True
@@ -478,9 +481,9 @@ def p_error(p):
 
 yacc.yacc()
 
-def analisador(data, file_num_lines):
+def analisador(data, numero_linhas):
   global total_linhas
-  total_linhas = file_num_lines
+  total_linhas = numero_linhas
   tree = yacc.parse(data, tracking = True)
 
   return tree, sucesso

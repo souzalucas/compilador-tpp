@@ -155,11 +155,13 @@ def t_ANY_error(t):
 	print('Caracter Inválido \'' + t.value[0] + '\' em ' + str(t.lineno) + ':' + str(f_column(t)))
 	t.lexer.skip(1)
 
+# Calculando informacoes da coluna
 def f_column(token):
   input = token.lexer.lexdata
   line_start = input.rfind('\n', 0, token.lexpos) + 1
   return (token.lexpos - line_start) + 1
 
+# Numero da linha
 def t_ANY_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
