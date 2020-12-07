@@ -2,51 +2,15 @@
 
 # Análise Léxica (Trabalho - 1ª parte)
 
-Implementação da fase de análise léxica do compilador para a linguagem de programação T++, utilizando a ferramenta PLY, do Python 3.
-
+O analisador léxico realiza uma varredura em todo o código-fonte em T++ e gera uma lista de tokens. Um token é uma marca que representa uma unidade. A lista de tokens será fundamental para as próximas etapas do compilador. Para desenvolvimento do analisador léxico foi utilizado a biblioteca PLY.
 ## Linguagem de programação T++
 
-### Sintaxe da linguagem usando a gramática BNF
+O T++ utilizado neste trabalho é uma linguagem de programação simples, desenvolvida para fins didáticos a ser utilizada para a fixação dos conteúdos da disciplina de compiladores.
 
-|||
-|-:|-|
-|programa ::=|lista_declaracoes|
-|lista_declaracoes ::= |lista_declaracoes declaracao \| declaracao
-|declaracao ::= |declaracao_variaveis \| inicializacao_variaveis \| declaracao_funcao|
-|declaracao_variaveis ::= |tipo DOIS_PONTOS lista_variaveis|
-|inicializacao_variaveis ::= |atribuicao|
-|lista_variaveis ::= |lista_variaveis VIRGULA var \| var|
-|var ::= |ID \| ID indice|
-|indice ::=| indice ABRE_COLCHETE expressao FECHA_COLCHETE \| ABRE_COLCHETE expressao FECHA_COLCHETE|
-|tipo ::= |INTEIRO \| FLUTUANTE|
-|declaracao_funcao ::= |tipo cabecalho \| cabecalho|
-|cabecalho ::= |ID ABRE_PARENTESE lista_parametros FECHA_PARENTESE corpo FIM|
-|lista_parametros ::= |lista_parametros VIRGULA parametro \| parametro \| vazio|
-|parametro ::= |tipo DOIS_PONTOS ID \| parametro ABRE_COLCHETE FECHA_COLCHETE|
-|corpo ::= |corpo acao \| vazio|
-|acao ::= |expressao \| declaracao_variaveis \| se \| repita \| leia \| escreva \| retorna \| erro|
-|se ::= |SE \| expressao ENTAO corpo FIM \| SE expressao ENTAO corpo SENAO corpo FIM|
-|repita ::= |REPITA corpo ATE expressao|
-|atribuicao ::= |var ATRIBUICAO expressao|
-|leia ::= |LEIA ABRE_PARENTESE var FECHA_PARENTESE|
-|escreva ::= |ESCREVA ABRE_PARENTESE expressao FECHA_PARENTESE|
-|retorna ::= |RETORNA ABRE_PARENTESE expressao FECHA_PARENTESE|
-|expressao ::= |expressao_logica \| atribuicao|
-|expressao_logica ::= |expressao_simples \| expressao_logica operador_logico expressao_simples|
-|expressao_simples ::= |expressao_aditiva \| expressao_simples operador_relacional expressao_aditiva|
-|expressao_aditiva ::= |expressao_multiplicativa \| expressao_aditiva operador_soma expressao_multiplicativa|
-|expressao_multiplicativa ::= |expressao_unaria \| expressao_multiplicativa operador_multiplicacao expressao_unaria|
-|expressao_unaria ::= |fator \| operador_soma fator \| operador_negacao fator|
-|operador_relacional ::= |MENOR \| MAIOR \| IGUAL \| DIFERENTE \| MENORIGUAL \| MAIORIGUAL|
-|operador_soma ::= |MAIS \| MENOS|
-|operador_logico ::= |ELOGICO \| OULOGICO|
-|operador_negacao ::= |NEGACAO|
-|operador_multiplicacao ::= |MULTIPLICACAO \| DIVISAO|
-|fator ::= |ABRE_PARENTESE expressao FECHA_PARENTESE \| var \| chamada_funcao \| numero|
-|numero ::= |NUM_INTEIRO \| NUM_PONTO_FLUTUANTE \| NUM_NOTACAO_CIENTIFICA|
-|chamada_funcao ::= |ID ABRE_PARENTESE lista_argumentos FECHA_PARENTESE|
-|lista_argumentos ::= |lista_argumentos VIRGULA expressao \| expressao \| vazio|
+Esta linguagem possui suas palavras-chave em português. Os tipos de variáveis suportados são inteiro, flutuante e notacão científica. Há suporte para estrutura condicional "se-entao-senão", bem como a estrutura de repeticão "repita-até". Além disso, a linguagem suporta operadores lógicos e aritméticos. Também é possível ler e escrever
+dados no terminal, criar vetores e funcões.
 
+Mais detalhes do analisador léxico serão apresentados a seguir.
 
 ## Palavras reservadas
 Abaixo temos as palavras reservadas da linguagem e seus respectivos tokens.
@@ -91,10 +55,10 @@ Abaixo temos as expressões regulares de cada token da linguagem.
 |r'\\['|ABRE_COLCHETE|
 |r'\\]'|FECHA_COLCHETE| 
 |r'\\{[^\\}]+?\\}'|COMENTARIO|
-|r'[a-zA-Z_]+[a-zA-Z_0-9]*'|ID|
-|r'[-\+]?[0-9]+'|NUM_INTEIRO|
-|r'[+-]?([0-9]+[.]([0-9]*)?\|[.][0-9]+)'|NUM_PONTO_FLUTUANTE|
-|r'([+-]?([0-9]+[.]([0-9]*)?\|[.][0-9]+)\|([0-9]+))([eE][-+]?\d+)'|NUM_NOTACAO_CIENTIFICA|
+|r'[a-zA-Z_áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ][a-zA-Z_0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]*'|ID|
+|r'(-\|\\+)?\d+'|NUM_INTEIRO|
+|r'(-\|\\+)?[\d+]+\\.[\d+]*'|NUM_PONTO_FLUTUANTE|
+|r'(-\|\\+)?[\d+]+\\.?[\d+]*(e\|E)(-\|\\+)?[\d+]+'|NUM_NOTACAO_CIENTIFICA|
 |r'se'|SE|
 |r'então'|ENTAO|
 |r'senão'|SENAO|
@@ -107,6 +71,8 @@ Abaixo temos as expressões regulares de cada token da linguagem.
 |r'inteiro'|INTEIRO|
 |r'flutuante'|FLUTUANTE|
 
+## Autômatos para geração de tokens
+
 ## Implementação
 
 ### PLY (Python Lex-Yacc)
@@ -117,17 +83,17 @@ Primeiramente, foi criado um dicionário contendo todas as palavras reservadas c
 
 ```python
 reservadas = {
-'se' 		: 'SE',
-'repita' 	: 'REPITA',
-'fim' 		: 'FIM',
-'leia' 		: 'LEIA',
-'retorna' 	: 'RETORNA',
-'escreva' 	: 'ESCREVA',
-'inteiro' 	: 'INTEIRO',
-'flutuante'	: 'FLUTUANTE',
-'até' 		: 'ATE',
-'senão' 	: 'SENAO',
-'então' 	: 'ENTAO'
+  'retorna': 'RETORNA',
+  'leia': 'LEIA',
+  'escreva': 'ESCREVA',
+  'se': 'SE',
+  'então': 'ENTAO',
+  'senão': 'SENAO',
+  'repita': 'REPITA',
+  'até': 'ATE',
+  'fim': 'FIM',
+  'inteiro': 'INTEIRO',
+  'flutuante': 'FLUTUANTE'
 }
 ```
 Logo após, foi criada uma lista com todos os tokens da linguagem.
@@ -139,13 +105,15 @@ tokens = ['MAIS', 'MENOS', 'MULTIPLICACAO', 'DIVISAO',
           'E_LOGICO', 'OU_LOGICO', 'NEGACAO', 'ABRE_PARENTESE', 
           'FECHA_PARENTESE', 'ABRE_COLCHETE', 'FECHA_COLCHETE', 
           'ATRIBUICAO', 'NUM_INTEIRO', 'NUM_PONTO_FLUTUANTE', 
-          'NUM_NOTACAO_CIENTIFICA', 'ID', 'COMENTARIO'] + list(reservadas.values())
+          'NUM_NOTACAO_CIENTIFICA', 'ID'] + list(reservadas.values())
 ```
 
 A partir daí, é necessário definirmos as expressões regulares de cada token, por exemplo:
 ```python
 #Expressão regular para o operador '+'
-t_MAIS = r'\+'
+def t_MAIOR(t):
+  r'>'
+  return t
 
 # Expressão Regular para a palavra reservada 'senão'
 def t_SENAO(t):
@@ -232,7 +200,6 @@ n : ID
 > : MAIOR
 0 : NUM_INTEIRO
 então : ENTAO
-{não calcula se n > 0} : COMENTARIO
 fat : ID
 := : ATRIBUICAO
 1 : NUM_INTEIRO
@@ -255,7 +222,6 @@ retorna : ID
 ( : ABRE_PARENTESE
 fat : ID
 ) : FECHA_PARENTESE
-{retorna o valor do fatorial de n} : COMENTARIO
 senão : SENAO
 retorna : ID
 ( : ABRE_PARENTESE
@@ -351,7 +317,6 @@ tam : ID
 tam : ID
 := : ATRIBUICAO
 10 : NUM_INTEIRO
-{ preenche o vetor no pior caso } : COMENTARIO
 preencheVetor : ID
 ( : ABRE_PARENTESE
 ) : FECHA_PARENTESE
@@ -389,7 +354,6 @@ i : ID
 < : MENOR
 tam : ID
 fim : ID
-{ implementação do bubble sort } : COMENTARIO
 bubble_sort : ID
 ( : ABRE_PARENTESE
 ) : FECHA_PARENTESE
@@ -462,7 +426,6 @@ i : ID
 < : MENOR
 tam : ID
 fim : ID
-{ programa principal } : COMENTARIO
 inteiro : ID
 principal : ID
 ( : ABRE_PARENTESE

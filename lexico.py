@@ -170,8 +170,8 @@ lexer = lex.lex()
 def imprimeToken(valor, tipo):
   print(valor, ":", tipo)
 
-def geraTokens(data):
-  lexer.input(data)
+def geraTokens(dados):
+  lexer.input(dados)
 
   tokens = []
 
