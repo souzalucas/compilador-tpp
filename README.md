@@ -1,8 +1,8 @@
 # Compilador TPP
 
-[Analise Sintática] (doc_lexico.md)
+[Analise Sintática](doc_lexico.md)
 
-[Analise Léxica] (doc_lexico.md)
+[Analise Léxica](doc_lexico.md)
 
 # Análise Léxica (Trabalho - 1ª parte)
 
