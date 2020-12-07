@@ -181,17 +181,8 @@ def geraTokens(dados):
     tokens_gerados = lexer.token()
     if not tokens_gerados: break
 
-    tokens.append({
-      'token_itself': tokens_gerados,
-      'token': tokens_gerados.type,
-      'value': tokens_gerados.value,
-      'line': tokens_gerados.lineno,
-      'column': f_column(tokens_gerados)
-    })
-
     imprimeToken(tokens_gerados.value, tokens_gerados.type)
 
-  return tokens
 
 nome_arquivo = sys.argv[1]
 

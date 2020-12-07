@@ -1,6 +1,7 @@
 # Análise Léxica (Trabalho - 1ª parte)
 
 O analisador léxico realiza uma varredura em todo o código-fonte em T++ e gera uma lista de tokens. Um token é uma marca que representa uma unidade. A lista de tokens será fundamental para as próximas etapas do compilador. Para desenvolvimento do analisador léxico foi utilizado a biblioteca PLY.
+
 ## Linguagem de programação T++
 
 O T++ utilizado neste trabalho é uma linguagem de programação simples, desenvolvida para fins didáticos a ser utilizada para a fixação dos conteúdos da disciplina de compiladores.

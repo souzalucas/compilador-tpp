@@ -12,16 +12,21 @@ tokens = lex.tokens
 sucesso = True
 total_linhas = 0
 
+# Busca coluna
 def f_column(token, pos):
   input = token.lexer.lexdata
   line_start = input.rfind('\n', 0, token.lexpos(pos)) + 1
   return (token.lexpos(pos) - line_start) + 1
 
+# Funcoes para cada regra
 def p_programa(p):
+
+  # Cabeçalho com a regra
   '''
     programa : lista_declaracoes
   '''
 
+  # Gerando nos
   p[0] = Node('programa', value = 'programa', children = [p[1]])
 
 def p_lista_declaracoes(p):
@@ -442,7 +447,6 @@ def p_chamada_funcao(p):
     p[3],
     Node(str(p[4]), value = str(p[4]), line = (p.lineno(4) - (total_linhas - 1)), column = f_column(p, 4))
   ])
-
 
 def p_lista_argumentos(p):
   '''
