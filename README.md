@@ -30,7 +30,7 @@ Abaixo temos as palavras reservadas da linguagem e seus respectivos tokens.
 |então|ENTAO|
 
 ## Expressões regulares
-Abaixo temos as expressões regulares de cada token da linguagem.
+Foram utilizadas expressões regulares para reconhecimento dos tokens em T++. No total foram 36 expressões regulares para das palavras-chave, operadores lógicos e aritméticos, numerais e símbolos, como igual, dois pontos, colchetes e parenteses.
 
 |EXPRESSÃO REGULAR|TOKEN|
 |:-|:-|
@@ -71,6 +71,7 @@ Abaixo temos as expressões regulares de cada token da linguagem.
 |r'flutuante'|FLUTUANTE|
 
 ## Autômatos para geração de tokens
+Os autômatos finitos que representam as expressões regulares utilizadas estão no seguinte link: <https://docs.google.com/document/d/1MsXd_C5zmrnNvaq3RI7FepmpKVP5LPnUKePc4ihThZc/edit?usp=sharing>.
 
 ## Implementação
 
