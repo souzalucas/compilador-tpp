@@ -15,7 +15,8 @@ def main():
     
     # Semantico
     if (sintatico_sucesso):
+        UniqueDotExporter(arvore).to_picture("arvore.png")
         arvore, tabela_simbolos, sema_sucesso = sem.semantica(arvore)
-        UniqueDotExporter(arvore).to_picture("programa.png")
+        UniqueDotExporter(arvore).to_picture("arvore_podada.png")
 
 main()
