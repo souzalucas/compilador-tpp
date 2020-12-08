@@ -4,7 +4,7 @@ Tendo em mãos a árvore sintática gerada na etapa anterior, o próximo passo �
 
 ## Poda da Árvore
 
-Para realizar a poda da arvore, os seguintes nós foram considerados passíveis de remocão: ’acao’, ’expressao’, ’expressao logica’, ’expressao simples’, ’expressao aditiva’, ’expressao multiplicativa’, ’expressao unaria’, ’operador relacional’, ’operador logico’, ’operador negacao’, ’fator’, ’lista variaveis’, ’operador soma’ e ’operador multiplicacao’.
+Para realizar a poda da árvore, os seguintes nós foram considerados passíveis de remocão: ’acao’, ’expressao’, ’expressao_logica’, ’expressao_simples’, ’expressao_aditiva’, ’expressao_multiplicativa’, ’expressao_unaria’, ’operador_relacional’, ’operador_logico’, ’operador_negacao’, ’fator’, ’lista_variaveis’, ’operador_soma’ e ’operador_multiplicacao’.
 
 As duas imagens abaixo apresentam exemplo de árvore antes da poda e após a poda.
 
@@ -16,7 +16,7 @@ As duas imagens abaixo apresentam exemplo de árvore antes da poda e após a pod
   <img src="arvore_podada.png"/>
 </p>
 
-Após a poda da árvore, então, a árvore podada deve ser percorrida para a realização da análise sensível ao contexto e geração da tabela de símbolos.
+Após a poda, ela deve ser percorrida para a realização da análise sensível ao contexto e geração da tabela de símbolos.
 
 ## Tabela de Símbolos
 A tabela de símbolos contém todas as variáveis e funções presentes no código, bem como seus atributos (valor, tipo, escopo, dimensões, parãmetros, etc).
@@ -41,7 +41,7 @@ inteiro principal()
 fim
 ```
 
-A análise semântica deste código deve retornar os seguintes erros:
+Executando `python3 main.py codigo.tpp` A análise semântica deste código deve retornar os seguintes erros:
 
 ```
 ERRO: Funcão principal deveria retornar inteiro, mas retorna vazio.
