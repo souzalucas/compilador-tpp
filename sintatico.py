@@ -488,6 +488,6 @@ yacc.yacc()
 def analisador(data, numero_linhas):
   global total_linhas
   total_linhas = numero_linhas
-  tree = yacc.parse(data, tracking = True)
+  arvore = yacc.parse(data, tracking = True)
 
-  return tree, sucesso
+  return arvore, sucesso

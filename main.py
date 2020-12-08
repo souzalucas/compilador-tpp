@@ -4,6 +4,7 @@ import os
 from anytree.exporter import UniqueDotExporter
 
 import sintatico as sin
+import semantico as sem
 
 def main():
     arquivo_teste = open(sys.argv[1], 'r', encoding = 'utf-8').read()
@@ -14,6 +15,7 @@ def main():
     
     # Semantico
     if (sintatico_sucesso):
+        arvore, tabela_simbolos, sema_sucesso = sem.semantica(arvore)
         UniqueDotExporter(arvore).to_picture("programa.png")
 
 main()
