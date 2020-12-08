@@ -44,7 +44,7 @@ fim
 Executando `python3 main.py codigo.tpp` A análise semântica deste código deve retornar os seguintes erros:
 
 ```
-ERRO: Funcão principal deveria retornar inteiro, mas retorna vazio.
+ERRO: Função principal deveria retornar inteiro, mas retorna vazio.
 AVISO: Atribuição de tipos distintos ’ a ’ flutuante e expressão inteiro.
 AVISO: Atribuição de tipos distintos ’ b ’ inteiro e expressão flutuante.
 ```
