@@ -369,7 +369,7 @@ def checa_array(no):
 
         checa_array(n)
 
-def checa_index(no):
+def checa_indice(no):
     global sucesso
     indices = []
     for n in no.children:
@@ -407,7 +407,7 @@ def checa_index(no):
 
 
 
-        checa_index(n)
+        checa_indice(n)
 
 # Funcao Principal
 def semantica(arvore):
@@ -470,6 +470,6 @@ def semantica(arvore):
     
     checa_atributo(arvore)
     checa_array(arvore)
-    checa_index(arvore)
+    checa_indice(arvore)
 
     return arvore, tabela_simbolos, sucesso
