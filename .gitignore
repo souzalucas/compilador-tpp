@@ -128,6 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-programa.png
 parsetab.py
 parser.out
+modulo
+modulo.ll
