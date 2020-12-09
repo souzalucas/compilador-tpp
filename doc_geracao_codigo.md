@@ -61,7 +61,7 @@ float leiaFlutuante() {
 ```
 
 ## Exemplo de Entrada e Saı́da
-Para melhor entendimento do funcionamento da geração de código, será apresentado um exemplo abaixo. Primeiramente é mostrado o exemplo de entrada, mostrando o código em linguagem T++, e em seguida é apresentado os código intermediário gerado para esse programa, bem como a execução e resultado final gerado após executar o programa. Este exemplo é um código simples que possui declaração de variável global e local, criação da função principal, atribuição e retorno.
+Para melhor entendimento do funcionamento da geração de código, será apresentado um exemplo abaixo. Primeiramente é mostrado o exemplo de entrada, mostrando o código em linguagem T++, e em seguida é apresentado o código intermediário gerado para esse programa, bem como a execução e resultado final gerado após executar o programa. Este exemplo é um código simples que possui declaração de variável global e local, criação da função principal, atribuição e retorno.
 
 ```c
 inteiro: a
