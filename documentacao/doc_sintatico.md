@@ -67,5 +67,5 @@ def main():
 Abaixo temos um exemplo de árvore gerada a partir do analisador sintático
 
 <p align="center">
-  <img src="../arvore.png"/>
+  <img src="../src/arvore.png"/>
 </p>

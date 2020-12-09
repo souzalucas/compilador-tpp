@@ -9,11 +9,11 @@ Para realizar a poda da árvore, os seguintes nós foram considerados passíveis
 As duas imagens abaixo apresentam exemplo de árvore antes da poda e após a poda.
 
 <p align="center">
-  <img src="../arvore.png"/>
+  <img src="../src/arvore.png"/>
 </p>
 
 <p align="center">
-  <img src="../arvore_podada.png"/>
+  <img src="../src/arvore_podada.png"/>
 </p>
 
 Após a poda, ela deve ser percorrida para a realização da análise sensível ao contexto e geração da tabela de símbolos.
